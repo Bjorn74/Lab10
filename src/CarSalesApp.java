@@ -9,7 +9,7 @@ public class CarSalesApp {
 		Scanner scan = new Scanner(System.in);
 
 		// Print Banner
-		System.out.println("Welcome to the Grand Circus Car Inventory Management System.\n       Don't forget to be Awesome!");
+		System.out.println("Welcome to the Grand Circus Car Inventory Management System.\n\t\tDon't forget to be Awesome!");
 
 		// Build Data Structure
 		// ArrayList will be most functional for adding and removing
@@ -30,7 +30,7 @@ public class CarSalesApp {
 
 		// Exit Routine
 		
-		System.out.println("Thank you for using the Grand Circus Car Inventory Control System.\n      Don't forget to be Awesome!");
+		System.out.println("Thank you for using the Grand Circus Car Inventory Control System.\n\t\tDon't forget to be Awesome!");
 	
 		// Clean Up
 		scan.close();
@@ -45,7 +45,8 @@ public class CarSalesApp {
 		while (response != 'x' && response != 'X') {
 			System.out.println();
 			System.out.println(
-					"Would you like to (A)dd, (C)hange, or (R)emove a car? \n View the list by (M)ake, M(O)del, (Y)ear, or (P)rice?\n ");
+					"Would you like to (A)dd, (C)hange, or (R)emove a car? \nView the list by (M)ake, M(O)del, (Y)ear, or (P)rice?");
+			System.out.println("Enter the line number to see a car individually.");
 			System.out.println("You can also e(X)it.");
 			response = scan.nextLine().charAt(0);
 			response = Character.toLowerCase(response);
@@ -84,20 +85,28 @@ public class CarSalesApp {
 				clearScreen();
 				showCars(carList);
 				break;
+			case 'i':
+				importCars(carList);
+				clearScreen();
+				showCars(carList);
+				break;
 			case 'x':
-				System.out.println("Enjoy your day.");
+				// Returns to main
 				break;
 			default:
 				if (Character.isDigit(response)) {
 					int num = Character.getNumericValue(response);
+					if (carList.size() > 9) {
+						Validator.getInt(scan, "We're having technical difficulties.\nPlease re-enter your numeric selection.", 1, carList.size());
+					}
 					// Display car in another format
 					Car.showCar(carList.get(num-1), num);
 					System.out.println();
-					Validator.getChar(scan, "Hit any key to return to menu.");
+					Validator.getChar(scan, "Hit Enter to return to menu.");
 				}	
 				else {
 					System.out.println();
-					Validator.getChar(scan, "Invalid Choice. Hit any key to return to menu.");
+					Validator.getChar(scan, "Invalid Choice. Hit Enter to return to menu.");
 					
 				}
 				clearScreen();
@@ -158,8 +167,8 @@ public class CarSalesApp {
 
 	public static void showCars(ArrayList<Car> carList) {
 		System.out.println(
-				String.format("   %-10s %-10s %-10s %-10s %-10s", "Make", "Model", "Year", "Price", "Mileage"));
-		System.out.println("   __________________________________________________");
+				String.format("   %-10s %-18s %4s    %-12s   %-13s", "Make", "Model", "Year", "Price", "Mileage"));
+		System.out.println("   _______________________________________________________________");
 		for (int i = 0; i < carList.size(); i++) {
 			System.out.println((i + 1) + "  " + carList.get(i).toString());
 		}
@@ -231,5 +240,16 @@ public class CarSalesApp {
 
 	}
 
-	
+	public static void importCars(ArrayList<Car> carList) {
+		// Save some time
+		carList.add(new UsedCar("Pontiac", "Bonneville" , 1994, 500, 212000));
+		carList.add(new UsedCar("Chevrolet", "Trailblazer", 2002, 2500, 178999));
+		carList.add(new UsedCar("Plymouth", "Voyager", 1988, 500, 186743));
+		carList.add(new UsedCar("Chevrolet", "Celebrity Eurosport", 1984, 500, 165732));
+		carList.add(new NewCar("Ford", "F-150", 2018, 64222));
+		carList.add(new NewCar("Lincoln", "Navigator", 2017, 73032));
+		carList.add(new NewCar("Honda", "Civic", 2017, 28556));
+		carList.add(new NewCar("Toyota", "Prius", 2018, 39773));
+		
+	}
 }

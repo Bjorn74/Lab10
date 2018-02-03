@@ -57,16 +57,17 @@ public class Car {
 	
 	// Functional Methods
 	public String toString(String make, String model, int year, double price) {
-		String printString = String.format("%-10s %-10s %-10d $%,-8.2f", make, model, year, price);
+		String printString = String.format("%-10s %-18s %-6d $%,-9.2f", make, model, year, price);
 		return printString;
 	}
 	
 	public String toString(Car car) {
-		String printString = String.format("%-10s %-10s %-10d $%,8.2f", car.getMake(), car.getModel(), car.getYear(), car.getPrice());
+		String printString = String.format("%-10s %-18s %-6d  $%,9.2f", car.getMake(), car.getModel(), car.getYear(), car.getPrice());
 		return printString;
 	}
 	
 	public static void showCar(Car car, int num) {
+		// This is here to be overridden.
 		CarSalesApp.clearScreen();
 		System.out.println("Car #" + num);
 		System.out.println(car.getYear() + " " + car.getMake() + " " + car.getModel());

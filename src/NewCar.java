@@ -17,12 +17,12 @@ public class NewCar extends Car {
 // Functional Methods
 
 	public String toString(String make, String model, int year, double price) {
-		String printString = String.format("%-10s %-10s %-10d $%,8.2f", make, model, year, price);
+		String printString = String.format("%-10s %-18s %-6d  $%,9.2f", make, model, year, price);
 		return printString;
 	}
 	
 	public String toString() {
-		String printString = String.format("%-10s %-10s %-10d $%,8.2f", make, model, year, price);
+		String printString = String.format("%-10s %-18s %-6d  $%,9.2f", make, model, year, price);
 		return printString;
 	}
 	

@@ -30,12 +30,12 @@ public class UsedCar extends Car {
 
 	// Functional Methods
 		public String toString(String make, String model, int year, double price, double mileage) {
-			String printString = String.format("%-10s %-10s %-10d $%,8.2f %,9.1f", make, model, year, price, mileage);
+			String printString = String.format("%-10s %-18s %-6d  $%,9.2f   %,11.1f", make, model, year, price, mileage);
 			return printString;
 		}
 		
 		public String toString() {
-			String printString = String.format("%-10s %-10s %-10d $%,8.2f %,9.1f", make, model, year, price, miles);
+			String printString = String.format("%-10s %-18s %-6d  $%,9.2f   %,11.1f", make, model, year, price, miles);
 			return printString;
 		}
 	
