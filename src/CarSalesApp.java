@@ -9,6 +9,7 @@ public class CarSalesApp {
 		Scanner scan = new Scanner(System.in);
 
 		// Print Banner
+		System.out.println("Welcome to the Grand Circus Car Inventory Management System.\n       Don't forget to be Awesome!");
 
 		// Build Data Structure
 		// ArrayList will be most functional for adding and removing
@@ -28,6 +29,13 @@ public class CarSalesApp {
 		carLotMenu(carList, scan);
 
 		// Exit Routine
+		
+		System.out.println("Thank you for using the Grand Circus Car Inventory Control System.\n      Don't forget to be Awesome!");
+	
+		// Clean Up
+		scan.close();
+		
+	
 	}
 
 	public static void carLotMenu(ArrayList<Car> carList, Scanner scan) {
@@ -37,7 +45,7 @@ public class CarSalesApp {
 		while (response != 'x' && response != 'X') {
 			System.out.println();
 			System.out.println(
-					"Would you like to (A)dd or (R)emove a car, \n or view the list by (M)ake, M(O)del, (Y)ear, or (P)rice?");
+					"Would you like to (A)dd, (C)hange, or (R)emove a car? \n View the list by (M)ake, M(O)del, (Y)ear, or (P)rice?\n ");
 			System.out.println("You can also e(X)it.");
 			response = scan.nextLine().charAt(0);
 			response = Character.toLowerCase(response);
@@ -47,10 +55,14 @@ public class CarSalesApp {
 				populateCarList(carList, scan);
 				break;
 			case 'c':
-				
+				changeCar(carList, scan);
+				clearScreen();
+				showCars(carList);
 				break;
 			case 'r':
 				removeCar(carList, scan);
+				clearScreen();
+				showCars(carList);
 				break;
 			case 'm':
 				Collections.sort(carList, new CompareMake());
@@ -79,8 +91,17 @@ public class CarSalesApp {
 				if (Character.isDigit(response)) {
 					int num = Character.getNumericValue(response);
 					// Display car in another format
-					Car.showCar(carList.get(num-1), num);				
-				}										
+					Car.showCar(carList.get(num-1), num);
+					System.out.println();
+					Validator.getChar(scan, "Hit any key to return to menu.");
+				}	
+				else {
+					System.out.println();
+					Validator.getChar(scan, "Invalid Choice. Hit any key to return to menu.");
+					
+				}
+				clearScreen();
+				showCars(carList);
 				break;
 			}
 
@@ -152,8 +173,6 @@ public class CarSalesApp {
 		if (confirm == 'y') {
 			carList.remove((removedCar - 1));
 		}
-
-		clearScreen();
 	}
 
 	public static void changeCar(ArrayList<Car> carList, Scanner scan) {

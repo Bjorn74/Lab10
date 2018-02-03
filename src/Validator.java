@@ -19,8 +19,13 @@ public class Validator
     
     public static char getChar(Scanner sc, String prompt)
     {
+    	char c = 'c';
         System.out.print(prompt);
-        char c = sc.nextLine().charAt(0);  // read user entry
+        try{
+        	c = sc.nextLine().charAt(0);  // read user entry
+        }
+        catch (StringIndexOutOfBoundsException e) {
+        }
         return c;
     }
 
